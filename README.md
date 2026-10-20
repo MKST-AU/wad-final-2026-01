@@ -42,6 +42,8 @@ Prerequisites: Node.js 22.12+ and npm, and access to MongoDB containing the test
 
 ## Build and lint
 
+Authenticated users can retrieve their own profile using `GET /api/user/<their-user-id>`. Other users' profiles are forbidden, and password hashes are never returned.
+
 Run `npm run lint` and `npm run build` in each project directory. Run `npm run start` for the built backend. Run `npm run preview` for the built frontend; set backend `FRONTEND_URL` to the preview origin (normally `http://localhost:4173`) before starting it.
 
 ## Deployment
