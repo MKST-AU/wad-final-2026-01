@@ -1,17 +1,20 @@
-// src/lib/mongodb.js
 
+import dns from "node:dns";
 import { MongoClient } from "mongodb";
+
+// Use Google's DNS for MongoDB Atlas SRV lookup
+dns.setServers(["8.8.8.8"]);
 
 const options = {};
 let globalClientPromise;
 
 export function getClientPromise() {
   const uri = process.env.MONGODB_URI;
+
   if (!uri) {
-    throw new Error(
-      "Please add your Mongo URI to .env.local or set MONGODB_URI env variable",
-    );
+    throw new Error("Please set MONGODB_URI in .env.local");
   }
+
   if (process.env.NODE_ENV === "development") {
     if (!globalClientPromise) {
       const client = new MongoClient(uri, options);
